@@ -30,4 +30,35 @@ function openTab(evt, tabName) {
    evt.currentTarget.className += ' offer__item-active';
 }
 
+//Slider
+
+
+
+$(document).ready(function () {
+   $('.feedback__slider').slick({
+      dots: false,
+      infinite: true,
+      speed: 300,
+      prevArrow: '<button type="button" class="slick-prev"><img src="icons/left__arrow.svg"></button>',
+      nextArrow: '<button type="button" class="slick-next"><img src="icons/right_arrow.svg"></button>',
+      autoplay: true,
+      autoplaySpeed: 6000,
+      slidesToShow: 1,
+      adaptiveHeight: true
+   });
+
+   $('form').submit(function (e) {
+      e.preventDefault();
+
+      $.ajax({
+         type: "POST",
+         url: "mailer/smart.php",
+         data: $(this).serialize()
+      }).done(function () {
+         $(this).find("input").val("");
+         $('form').trigger('reset');
+      });
+      return false;
+   });
+});
 
